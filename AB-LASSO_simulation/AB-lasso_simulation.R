@@ -4,6 +4,9 @@ setwd("~/Documents/GitHub/Arellano-Bond-LASSO/AB-LASSO_simulation")
 libraries = c("mvtnorm", "plm", "hdm", "glmnet", "matrixStats", "dpm")
 lapply(libraries, library, quietly = TRUE, character.only = TRUE)
 
+rep_id = 1
+set.seed(1000 + rep_id)
+
 NN = c(100,200)
 TT = c(20,30,40,50,60)
 sigmas = c(sqrt(2.96),sqrt(6.58),1)

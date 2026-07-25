@@ -9,6 +9,15 @@ attach(sdf_week)
 N = length(unique(fips))
 T = length(unique(week))
 
+Y = matrix(logdc, nrow = T, ncol = N)  #case level
+D = matrix(school, nrow = T, ncol = N) 
+ZZ = ZZ.t = list()
+ZZ[[1]] = matrix(dlogtests, nrow = T, ncol = N)  
+ZZ[[2]] = matrix(college, nrow = T, ncol = N)
+ZZ[[3]] = matrix(pmask, nrow = T, ncol = N)
+ZZ[[4]] = matrix(pshelter, nrow = T, ncol = N)
+ZZ[[5]] = matrix(pgather50, nrow = T, ncol = N)
+
 Y.t = D.t = matrix(0, T-1, N)
 for(i in 1:N){
   for(t in 1:(T-1)){

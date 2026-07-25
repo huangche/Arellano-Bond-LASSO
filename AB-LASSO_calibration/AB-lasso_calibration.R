@@ -18,7 +18,7 @@ ZZ[[3]] = matrix(pmask, nrow = T, ncol = N)
 ZZ[[4]] = matrix(pshelter, nrow = T, ncol = N)
 ZZ[[5]] = matrix(pgather50, nrow = T, ncol = N)
 
-l = 1
+lag = l = 1
 dataset = cbind(as.factor(fips), as.factor(week), as.vector(dlogdc), as.vector(school), as.vector(logdc), as.vector(pmask), as.vector(pgather50), as.vector(college), as.vector(pshelter), as.vector(dlogtests))
 colnames(dataset) = c("fips", "week", "dlogdc", "school", "logdc", "pmask", "pgather50", "college", "pshelter", "dlogtests")
 # FE
@@ -33,6 +33,9 @@ prepara = list(theta = theta, effects = effects, sigma = sd(residual))
 save(prepara, file = "application_calibration2.dat")
 
 ####### for a single replication
+rep_id = 1
+set.seed(1000 + rep_id)
+
 load("application_calibration2.dat")
 effects = matrix(prepara$effects, nrow = T-lag, ncol = N)
 theta = prepara$theta[c(1:(lag+length(ZZ)),length(prepara$theta))]
