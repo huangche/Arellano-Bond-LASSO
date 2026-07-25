@@ -31,7 +31,7 @@ round(results$std.hat.dab,2)
 round(results$stat.dab,2)
 
 # long-run effects of D
-HCV.coefs = vcovHC(fit.ab, cluster = 'group')
+HCV.coefs = results$HCV.coefs
 lr.dab     = results$theta.hat.dab[1]/(1-sum(results$theta.hat.dab[2:(l+1)]))
 jac.lr    = c(1,rep(lr.dab,l))/(1-sum(results$theta.hat.dab[2:(l+1)]))
 cse.lr.dab = sqrt(t(jac.lr) %*% HCV.coefs[c(1,2:(l+1)),c(1,2:(l+1))] %*% jac.lr)
