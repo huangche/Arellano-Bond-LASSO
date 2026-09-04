@@ -4,6 +4,7 @@ library(plm)
 
 data = load("data_weekly_balanced.Rdata")
 attach(sdf_week)
+N = length(unique(fips))
 
 ############### DAB ################
 l = 4

@@ -404,6 +404,13 @@ dataset = cbind(as.factor(fips), as.factor(week), as.vector(dlogdc), as.vector(s
 colnames(dataset) = c("fips", "week", "dlogdc", "school", "logdc", "pmask", "pgather50", "college", "pshelter", "dlogtests")
 
 data.fe = pdata.frame(dataset, index = c("fips","week"))
+form.fe = logdc ~ lag(logdc, 1:lag) + lag(school, 1) + lag(college, 1) + lag(pmask, 1)  + lag(pshelter, 1) + lag(pgather50, 1) + dlogtests - 1
+fit.fe = plm(form.fe, data.fe, model = "within", effect = "twoways", index = c("fips","week"))
+fit.fe = summary(fit.fe)
+theta.hat.fe = fit.fe$coefficients[,"Estimate"]
+HCV.coefs = vcovHC(fit.fe, cluster = 'group')
+se.fe = sqrt(diag(HCV.coefs)) 
+
 form = character(0)
 for(j in 1:lag){
   name = paste("logdc.lag", j, sep="")
